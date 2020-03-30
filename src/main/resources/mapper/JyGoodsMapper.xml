@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jianyi.mapper.JyGoodsMapper" >
+    <select id="getAllname" resultType="com.jianyi.model.JyUser">
+		select * from jy_user
+		where user_name=#{user_name}
+		and user_status=1
+	</select>
+    <select id="login" resultType="com.jianyi.model.JyUser">
+			SELECT * FROM `jy`.`jy_user` WHERE user_id=#{user_id} AND user_password=#{user_password}
+		</select>
+    <insert id="add">
+			insert into `jy`.`jy_goods` (`user_id`, `goods_name`, `goods_img`,`goods_status`,`goods_type`,`goods_now`) values (#{user_id}, #{goods_name},#{goods_img},0,#{goods_type},0)
+		</insert>
+    <update id="informationchange">
+			update jy_goods set goods_name=#{goods_name},goods_information=#{goods_information},goods_type=#{goods_type},goods_now=#{goods_now} where goods_id=#{goods_id}
+		</update>
+    <update id="delete" parameterType="java.lang.Integer">
+			update jy_user set user_status=0 where user_id=#{id}
+		</update>
+    <select id="getid" resultType="com.jianyi.model.JyGoods">
+		select * from jy_goods
+		where goods_id=#{goods_id}
+	</select>
+	<select id="serach" resultType="com.jianyi.model.JyGoods">
+		select * from jy_goods
+		where goods_type=#{keyword} or goods_name=#{keyword} or goods_type like CONCAT('%',#{keyword},'%') or goods_name like CONCAT('%',#{keyword},'%')
+	</select>
+	<update id="informationgoodsname">
+			update jy_goods set goods_name=#{goods_name} where goods_id=#{goods_id}
+		</update>
+	<update id="informationgoodstype">
+			update jy_goods set goods_type=#{goods_type} where goods_id=#{goods_id}
+		</update>
+	<update id="informationgoodsinformation">
+			update jy_goods set goods_information=#{goods_information} where goods_id=#{goods_id}
+		</update>
+	<update id="informationgoodsnow">
+			update jy_goods set goods_now=#{goods_now} where goods_id=#{goods_id}
+		</update>
+
+</mapper>
