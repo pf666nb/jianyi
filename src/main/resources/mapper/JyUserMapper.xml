@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jianyi.mapper.JyUserMapper" >
+	<select id="getAllname" resultType="com.jianyi.model.JyUser">
+		select * from jy_user
+		where user_name=#{user_name}
+		and user_status=1
+	</select>
+    <select id="login" resultType="com.jianyi.model.JyUser">
+
+			SELECT * FROM `jy`.`jy_user` WHERE user_id=#{user_id} AND user_password=#{user_password}
+		</select>
+	<insert id="addvercode">
+
+			insert into `jy`.`jy_vercode` (`vercode`,`v_id`)values (#{vercode},#{v_id})
+		</insert>
+
+    <insert id="add">
+			insert into `jy`.`jy_user` (`user_id`, `user_name`, `user_password`,`user_status`,`user_email`,`user_created`) values (#{user_id}, #{user_name},#{user_password},1,#{user_email},#{user_created})
+		</insert>
+    <update id="update">
+			update jy_user set user_password=#{user_password} where user_id=#{user_id}
+		</update>
+    <update id="delete" parameterType="java.lang.Integer">
+			update jy_user set user_status=0 where user_id=#{id}
+		</update>
+    <select id="getAllid" resultType="com.jianyi.model.JyUser">
+		select * from jy_user
+		where user_id=#{user_id}
+		and user_status=1
+
+	</select>
+	<select id="idemail" resultType="String">
+		select * from jy_user where user_id = #{user_id} and user_email = #{email};
+	</select>
+	<select id="getvercode" resultType="String">
+		select * from jy_vercode where v_id =#{v_id}
+	</select>
+	<delete id="deletevercode">
+		DELETE FROM `jy`.`jy_vercode`
+	</delete>
+	<update id="addinformation">
+		update jy_user set user_phone=#{user_phone},user_sex=#{user_sex},user_address=#{user_address},user_birth=#{user_birth},user_updated=#{user_updated},user_hobby=#{user_hobby},user_autograph=#{user_autograph} where user_id=#{user_id}
+	</update>
+	<update id="changeusername">
+		update jy_user set user_name = #{user_name} where user_id = #{user_id}
+	</update>
+	<update id="changeusersex">
+		update jy_user set user_sex = #{user_sex} where user_id = #{user_id}
+	</update>
+	<update id="changeuserphone">
+		update jy_user set user_phone = #{user_phone} where user_id = #{user_id}
+	</update>
+	<update id="changeuseraddress">
+		update jy_user set user_address = #{user_address} where user_id = #{user_id}
+	</update>
+	<update id="changeuserhobby">
+		update jy_user set user_hobby = #{user_hobby} where user_id = #{user_id}
+	</update>
+	<update id="changeuserautograph">
+		update jy_user set user_autograph = #{user_autograph} where user_id = #{user_id}
+	</update>
+	<update id="changeuserbirth">
+		update jy_user set user_birth = #{user_birth} where user_id = #{user_id}
+	</update>
+	<update id="imgupload">
+		update jy_user set user_img = #{img} where user_id =#{user_id}
+	</update>
+	<update id="changeuseremail">
+		update jy_user set user_email = #{email} where user_id = #{user_id}
+	</update>
+
+</mapper>
